@@ -2,21 +2,34 @@ using UnityEngine;
 
 public class OvenCollision : MonoBehaviour
 {
+    private bool isPlayerInTrigger = false;
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            isPlayerInTrigger = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInTrigger = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Debug.Log("오븐 앞에서 Shift 키가 눌렸습니다!");
+            Oven oven = GetComponentInParent<Oven>();
+            if (oven != null)
             {
-                Debug.Log("오븐앞에서 Shift 키가 눌렸습니다!");
-                Oven oven = GetComponentInParent<Oven>();
-                if (oven != null)
-                {
-                    oven.TryCook(); // 부모의 함수 호출
-                }
+                oven.TryCook(); // 부모 오브젝트의 함수 호출
             }
         }
     }
 }
-
