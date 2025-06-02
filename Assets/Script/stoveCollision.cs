@@ -2,17 +2,16 @@ using UnityEngine;
 
 public class StoveCollision : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log($"플레이어가 {this.name}에 들어왔습니다!");
+            // Shift 키를 누른 "순간"만 감지
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                Debug.Log("조리대앞에서 Shift 키가 눌렸습니다!");
+                StoveManager.Instance.ToOven("meat");
+            }
         }
-    }
-
-    private void OnTriggerExit(Collider other) {
-
-        Debug.Log($"플레이어가 {this.name}에서 나갔습니다!");
-
     }
 }
