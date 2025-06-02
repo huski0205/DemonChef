@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class StoveManager : MonoBehaviour
 {
-    // 싱글톤 인스턴스
-    public static StoveManager Instance { get; private set; }
+    //public static StoveManager Instance { get; private set; }
 
     public string[] storedFood;
     public int stoveSize = 5;
@@ -13,7 +12,7 @@ public class StoveManager : MonoBehaviour
 
     void Awake()
     {
-        // 싱글톤 설정
+        /*
         if (Instance == null)
         {
             Instance = this;
@@ -23,8 +22,8 @@ public class StoveManager : MonoBehaviour
         {
             Destroy(gameObject); // 중복 방지
         }
+        */
 
-        // 배열 초기화
         storedFood = new string[stoveSize];
         for (int i = 0; i < stoveSize; i++)
         {

@@ -708,6 +708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa2d24c4d025464dbb174de04cdb9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StoveManager: {fileID: 1803870609}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1824,6 +1825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa2d24c4d025464dbb174de04cdb9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StoveManager: {fileID: 1803870609}
 --- !u!1 &1215734322 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6557108471991882517, guid: c502df981c209ef41995607d406ccde9, type: 3}
@@ -2210,6 +2212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa2d24c4d025464dbb174de04cdb9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StoveManager: {fileID: 1803870609}
 --- !u!1 &1899172726 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8341595250129989173, guid: c502df981c209ef41995607d406ccde9, type: 3}
@@ -2358,6 +2361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa2d24c4d025464dbb174de04cdb9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StoveManager: {fileID: 1803870609}
 --- !u!1 &1933613942
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,6 +2437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa2d24c4d025464dbb174de04cdb9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StoveManager: {fileID: 1803870609}
 --- !u!1 &1946855424 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7188961822606498399, guid: c502df981c209ef41995607d406ccde9, type: 3}

@@ -3,7 +3,7 @@ using UnityEngine;
 public class StoveCollision : MonoBehaviour
 {
     private bool isPlayerInTrigger = false;
-
+    public StoveManager StoveManager;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -25,7 +25,7 @@ public class StoveCollision : MonoBehaviour
         if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.LeftShift))
         {
             //Debug.Log("조리대 앞에서 Shift 키가 눌렸습니다!");
-            StoveManager.Instance.ToOven("meat");
+            StoveManager.ToOven("meat");
         }
     }
 }
