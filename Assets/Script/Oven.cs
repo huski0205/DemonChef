@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using Unity.VisualScripting;
 
 public class Oven : MonoBehaviour
 {
@@ -6,6 +8,17 @@ public class Oven : MonoBehaviour
     private int currentN = 0; 
     private bool playerInRange = false;
     private string[] currentIngredients = new string[3];
+
+    public TextMeshProUGUI scoreText;  // 인스펙터에서 연결
+    private int score = 0;
+    public int bad = -1;
+    public int good = 1;
+    public int perfect = 2;
+
+    void Start()
+    {
+        UpdateScoreText();
+    }
     void Update()
     {
     }
@@ -16,6 +29,9 @@ public class Oven : MonoBehaviour
         {
             Debug.Log("요리 성공!");
             currentN = 0; // 요리 후 재료 초기화
+
+            score += good;
+            UpdateScoreText();
         }
         else
         {
@@ -36,21 +52,8 @@ public class Oven : MonoBehaviour
         }
     }
 
-    // 플레이어가 오븐 앞에 들어올 때
-    private void OnTriggerEnter(Collider other)
+    private void UpdateScoreText()
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = true;
-        }
-    }
-
-    // 플레이어가 오븐 앞에서 나갈 때
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = false;
-        }
+        scoreText.text = score.ToString();
     }
 }
