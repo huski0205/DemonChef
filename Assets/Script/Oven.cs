@@ -8,14 +8,9 @@ public class Oven : MonoBehaviour
     private string[] currentIngredients = new string[3];
     void Update()
     {
-        //if (playerInRange && Input.GetKeyDown(KeyCode.LeftShift))
-        if (Input.GetKeyDown(KeyCode.RightShift))
-        {
-            TryCook();
-        }
     }
 
-    void TryCook()
+    public void TryCook()
     {
         if (currentN >= requiredN)
         {
@@ -37,7 +32,7 @@ public class Oven : MonoBehaviour
             Debug.Log($"{food}을(를) 오븐에 추가했습니다. (현재 {currentN}개)");
         }
         else {
-            Debug.Log($"오븐이 꽉차있습니다!요리하세요!");
+            Debug.Log($"오븐이 꽉차있습니다! 새재료를 넣기전, 요리하세요!");
         }
     }
 

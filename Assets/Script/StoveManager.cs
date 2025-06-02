@@ -34,6 +34,7 @@ public class StoveManager : MonoBehaviour
 
     void Start()
     {
+        /*
         // 테스트용 슬롯 채우기
         ToSlot("grain");
         ToSlot("meat");
@@ -41,6 +42,7 @@ public class StoveManager : MonoBehaviour
         ToSlot("grain");
         ToSlot("grain");
         ToSlot("meat"); // <- 실패해야 됨
+        */
     }
 
     public void ToSlot(string food)
