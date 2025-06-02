@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class stoveCollision : MonoBehaviour
+public class StoveCollision : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
@@ -10,8 +10,9 @@ public class stoveCollision : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other) { 
-    
-    
+    private void OnTriggerExit(Collider other) {
+
+        Debug.Log($"플레이어가 {this.name}에서 나갔습니다!");
+
     }
 }
