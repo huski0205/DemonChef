@@ -15,17 +15,43 @@ public class StoveManager : MonoBehaviour
 
     void Awake()
     {
-
+        isFilled = new bool[stoveSlots.Length];
         storedFood = new string[stoveSize];
         for (int i = 0; i < stoveSize; i++)
         {
             storedFood[i] = "";
         }
     }
+    public Transform[] stoveSlots;
+    private bool[] isFilled;
+
+    public Transform GetNextEmptySlot()
+    {
+        for (int i = 0; i < stoveSlots.Length; i++)
+        {
+            if (!isFilled[i])
+                return stoveSlots[i];
+        }
+        return null;
+    }
+
+    public void MarkSlotFilled(Transform slot)
+    {
+        for (int i = 0; i < stoveSlots.Length; i++)
+        {
+            if (stoveSlots[i] == slot)
+            {
+                isFilled[i] = true;
+
+                return;
+            }
+        }
+    }
 
     void Start()
     {
     }
+
 
     public void ToSlot(string food)
     {

@@ -38,6 +38,6 @@ public class Spawner : MonoBehaviour
         // 랜덤 위치 선택
         Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        Instantiate(randomPrefab, randomSpawnPoint.position, randomSpawnPoint.rotation);
+        Instantiate(randomPrefab, randomSpawnPoint.position, randomPrefab.transform.rotation);
     }
 }

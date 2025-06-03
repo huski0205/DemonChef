@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6059097817976099686}
   - component: {fileID: 6654268718649309801}
   - component: {fileID: 3030010000669536334}
+  - component: {fileID: 1255234512596253852}
   m_Layer: 0
   m_Name: Sphere_grain
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.11, y: 2.41, z: 2.4}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2425105318253746861}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -5685747348123688494, guid: ffd0941a23e584b4ea45d838044b07ec, type: 3}
 --- !u!23 &659707952442401119
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -67,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: d81c9aa2fe43ae449bf81fe5f0565d7a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,8 +109,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.0577116
+  m_Center: {x: 0, y: -0.0011786819, z: 0}
 --- !u!54 &6654268718649309801
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -150,3 +151,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flowSpeed: 2
+  deleteposition_z: -20
+--- !u!114 &1255234512596253852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2425105318253746861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e59f48fa22a4ae24883ed089d513725d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualPrefab: {fileID: 2425105318253746861}
