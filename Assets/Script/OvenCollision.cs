@@ -3,6 +3,7 @@ using UnityEngine;
 public class OvenCollision : MonoBehaviour
 {
     private bool isPlayerInTrigger = false;
+    public KeyCode actionKey;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,9 +23,11 @@ public class OvenCollision : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.LeftShift))
+        //Debug.Log($"{this.name} 의 ovenCollison.cs 작동중");
+
+        if (isPlayerInTrigger && Input.GetKeyDown(actionKey))
         {
-            Debug.Log("오븐 앞에서 Shift 키가 눌렸습니다!");
+            Debug.Log("오븐 앞에서 키가 눌렸습니다!");
             Oven oven = GetComponentInParent<Oven>();
             if (oven != null)
             {

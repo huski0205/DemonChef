@@ -6,7 +6,6 @@ public class Oven : MonoBehaviour
 {
     public int requiredN = 3; 
     private int currentN = 0; 
-    private bool playerInRange = false;
     private string[] currentIngredients = new string[3];
 
     public TextMeshProUGUI ovenText;  // 인스펙터에서 연결
