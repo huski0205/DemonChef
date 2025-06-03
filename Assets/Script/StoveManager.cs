@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class StoveManager : MonoBehaviour
@@ -10,19 +11,10 @@ public class StoveManager : MonoBehaviour
 
     public GameObject ovenObject;
 
+    public TextMeshProUGUI stoveText;  // 인스펙터에서 연결
+
     void Awake()
     {
-        /*
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // 씬 전환 시에도 유지하고 싶다면
-        }
-        else
-        {
-            Destroy(gameObject); // 중복 방지
-        }
-        */
 
         storedFood = new string[stoveSize];
         for (int i = 0; i < stoveSize; i++)
@@ -33,15 +25,6 @@ public class StoveManager : MonoBehaviour
 
     void Start()
     {
-        /*
-        // 테스트용 슬롯 채우기
-        ToSlot("grain");
-        ToSlot("meat");
-        ToSlot("fruit");
-        ToSlot("grain");
-        ToSlot("grain");
-        ToSlot("meat"); // <- 실패해야 됨
-        */
     }
 
     public void ToSlot(string food)
@@ -50,12 +33,15 @@ public class StoveManager : MonoBehaviour
         {
             if (i == stoveSize)
             {
-                Debug.Log($"{food}넣기 실패: 조리대가 꽉차있습니다!");
+                stoveText.text = $"{food} adding FAILED: stove is full";
+                //Debug.Log($"{food}넣기 실패: 조리대가 꽉차있습니다!");
             }
             else if (storedFood[i] == "")
             {
                 storedFood[i] = food;
-                Debug.Log($"{i}번째 조리대에 {food}이 들어갔습니다!");
+
+                stoveText.text = $"{food} add to stove {i}";
+                //Debug.Log($"{i}번째 조리대에 {food}이 들어갔습니다!");
                 break;
             }
         }

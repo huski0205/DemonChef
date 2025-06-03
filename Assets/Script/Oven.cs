@@ -9,6 +9,8 @@ public class Oven : MonoBehaviour
     private bool playerInRange = false;
     private string[] currentIngredients = new string[3];
 
+    public TextMeshProUGUI ovenText;  // 인스펙터에서 연결
+
     public TextMeshProUGUI scoreText;  // 인스펙터에서 연결
     private int score = 0;
     public int bad = -1;
@@ -27,7 +29,8 @@ public class Oven : MonoBehaviour
     {
         if (currentN >= requiredN)
         {
-            Debug.Log("요리 성공!");
+            ovenText.text = "cooking success!";
+            //Debug.Log("요리 성공!");
             currentN = 0; // 요리 후 재료 초기화
 
             score += good;
@@ -35,7 +38,8 @@ public class Oven : MonoBehaviour
         }
         else
         {
-            Debug.Log("아직 재료가 부족합니다.");
+            ovenText.text = "need more ingredient...";
+            //Debug.Log("아직 재료가 부족합니다.");
         }
     }
 
@@ -45,10 +49,12 @@ public class Oven : MonoBehaviour
         {
             currentIngredients[currentN] = food;
             currentN++;
-            Debug.Log($"{food}을(를) 오븐에 추가했습니다. (현재 {currentN}개)");
+            ovenText.text = $"{food} added to oven. (count:{currentN})";
+            //Debug.Log($"{food}을(를) 오븐에 추가했습니다. (현재 {currentN}개)");
         }
         else {
-            Debug.Log($"오븐이 꽉차있습니다! 새재료를 넣기전, 요리하세요!");
+            ovenText.text = "oven is full! cook before adding new ingredients";
+            //Debug.Log($"오븐이 꽉차있습니다! 새재료를 넣기전, 요리하세요!");
         }
     }
 
