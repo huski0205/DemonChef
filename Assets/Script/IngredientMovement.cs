@@ -3,6 +3,7 @@
 public class IngredientMovement : MonoBehaviour
 {
     public GameObject visualPrefab;
+    public string ingredientName = "meat";  // 필수: 재료 이름
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -10,12 +11,10 @@ public class IngredientMovement : MonoBehaviour
 
         if (player.CompareTag("Player_R"))
         {
-           
             TryPlaceOnStove("StoveManager_R");
         }
         else if (player.CompareTag("Player_L"))
         {
-           
             TryPlaceOnStove("StoveManager_L");
         }
     }
@@ -23,8 +22,8 @@ public class IngredientMovement : MonoBehaviour
     void TryPlaceOnStove(string stoveManagerObjectName)
     {
         StoveManager manager = GameObject.Find(stoveManagerObjectName).GetComponent<StoveManager>();
+        Transform slot = manager.GetNextEmptySlot(ingredientName);
 
-        Transform slot = manager.GetNextEmptySlot();
         if (slot != null)
         {
             if (visualPrefab != null)
@@ -34,8 +33,6 @@ public class IngredientMovement : MonoBehaviour
             }
 
             manager.MarkSlotFilled(slot);
-            
-            Debug.Log("슬롯에 채웠습니다!");
             Destroy(gameObject);
         }
         else
@@ -43,5 +40,4 @@ public class IngredientMovement : MonoBehaviour
             Debug.Log($"{stoveManagerObjectName}에 빈 스토브 슬롯이 없습니다!");
         }
     }
-
 }

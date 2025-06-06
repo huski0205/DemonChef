@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -1869581712459073880}
   m_Layer: 0
   m_Name: Sphere_vegitable
-  m_TagString: Untagged
+  m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,3 +165,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualPrefab: {fileID: 1031164692123395285}
+  ingredientName: vegitable

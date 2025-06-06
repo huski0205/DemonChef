@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class StoveManager : MonoBehaviour
 {
-    //public static StoveManager Instance { get; private set; }
-
-    public string[] storedFood;
+    public string[] storedFood; // 어떤 음식이 저장되어있는지 이름으로 저장 
     public int stoveSize = 5;
 
     public GameObject ovenObject;
+    public TextMeshProUGUI stoveText;
 
-    public TextMeshProUGUI stoveText;  // 인스펙터에서 연결
+    public Transform[] stoveSlots; // 음식이 떨어질 위치 
+    private bool[] isFilled; // 위치가 비어있는지 체크 
 
     void Awake()
     {
@@ -22,15 +22,34 @@ public class StoveManager : MonoBehaviour
             storedFood[i] = "";
         }
     }
-    public Transform[] stoveSlots;
-    private bool[] isFilled;
 
-    public Transform GetNextEmptySlot()
+    void Start()
+    {
+        // 슬롯 배열과 저장된 음식 초기화
+        for (int i = 0; i < stoveSize; i++)
+        {
+            storedFood[i] = "";
+            if (i < isFilled.Length)
+            {
+                isFilled[i] = false;
+            }
+        }
+
+        if (stoveText != null)
+        {
+            stoveText.text = "Stove initialized.";
+        }
+    }
+
+    public Transform GetNextEmptySlot(string food)
     {
         for (int i = 0; i < stoveSlots.Length; i++)
         {
             if (!isFilled[i])
+            {
+                storedFood[i] = food;
                 return stoveSlots[i];
+            }
         }
         return null;
     }
@@ -42,39 +61,38 @@ public class StoveManager : MonoBehaviour
             if (stoveSlots[i] == slot)
             {
                 isFilled[i] = true;
-
                 return;
             }
         }
     }
 
-    void Start()
+    public void ToOven(int slotIndex)
     {
-    }
-
-
-    public void ToSlot(string food)
-    {
-        for (int i = 0; i <= stoveSize; i++)
+        
+        if (slotIndex < 0 || slotIndex >= stoveSize)
         {
-            if (i == stoveSize)
-            {
-                stoveText.text = $"{food} adding FAILED: stove is full";
-                //Debug.Log($"{food}넣기 실패: 조리대가 꽉차있습니다!");
-            }
-            else if (storedFood[i] == "")
-            {
-                storedFood[i] = food;
-
-                stoveText.text = $"{food} add to stove {i}";
-                //Debug.Log($"{i}번째 조리대에 {food}이 들어갔습니다!");
-                break;
-            }
+            stoveText.text = "Invalid slot index!";
+            return;
         }
-    }
-    public void ToOven(string food)
-    {
-        ovenObject.GetComponent<Oven>().AddIngredient("meat");
+        Oven oven = ovenObject.GetComponent<Oven>();
+        if (oven.isFull)
+        {
+            stoveText.text = "Oven is full! Please cook before adding more.";
+            return;
+        }
+        if (isFilled[slotIndex])
+        {
+            string food = storedFood[slotIndex];
+            ovenObject.GetComponent<Oven>().AddIngredient(food);
 
+            storedFood[slotIndex] = "";  // 배열에서 해당 음식 삭제
+            isFilled[slotIndex] = false;  // 슬롯 비워줌
+
+            stoveText.text = $"{food} sent to oven from slot {slotIndex}!";
+        }
+        else
+        {
+            stoveText.text = $"Slot {slotIndex} is already empty!";
+        }
     }
 }

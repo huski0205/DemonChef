@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Player_R
   - Player_L
+  - Ingredient
   layers:
   - Default
   - TransparentFX
