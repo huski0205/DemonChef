@@ -109,4 +109,9 @@ public class Oven : MonoBehaviour
     {
         scoreText.text = score.ToString();
     }
+
+    public int Score
+    {
+        get { return score; }
+    }
 }
