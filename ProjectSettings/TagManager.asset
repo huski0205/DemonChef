@@ -7,6 +7,7 @@ TagManager:
   - Player_R
   - Player_L
   - Ingredient
+  - Lava
   layers:
   - Default
   - TransparentFX
