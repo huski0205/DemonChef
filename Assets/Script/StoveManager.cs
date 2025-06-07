@@ -80,7 +80,7 @@ public class StoveManager : MonoBehaviour
             stoveText.text = "Oven is full! Please cook before adding more.";
             return;
         }
-        if (isFilled[slotIndex])
+        if (isFilled[slotIndex] && oven.canCook)
         {
             string food = storedFood[slotIndex];
             ovenObject.GetComponent<Oven>().AddIngredient(food);

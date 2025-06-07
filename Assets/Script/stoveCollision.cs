@@ -38,7 +38,7 @@ public class StoveCollision : MonoBehaviour
             StoveManager.ToOven(stoveIndex);
            
             // 재료 오브젝트 삭제
-            if (Ingredient != null)
+            if (Ingredient != null&& oven.canCook)
             {
                 Destroy(Ingredient);
                 Ingredient = null; // 참조도 초기화
