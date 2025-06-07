@@ -1,7 +1,6 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using Unity.VisualScripting;
 
 public class Oven : MonoBehaviour
 {
@@ -9,22 +8,27 @@ public class Oven : MonoBehaviour
     private int currentN = 0;
     private string[] currentIngredients = new string[3];
 
-    public TextMeshProUGUI ovenText;          // ÀÎ½ºÆåÅÍ¿¡¼­ ¿¬°á
+    public TextMeshProUGUI ovenText;
     public OvenCanvas ovenCanvas;
-    public TextMeshProUGUI scoreText;         // ÀÎ½ºÆåÅÍ¿¡¼­ ¿¬°á
-    public Slider cooldownSlider;              // ÀÎ½ºÆåÅÍ¿¡¼­ ¿¬°á (ÄðÅ¸ÀÓ Ç¥½Ã¿ë)
-    public GameObject oven_fire_fx;            // ÀÎ½ºÆåÅÍ¿¡¼­ ¿¬°á (ÄðÅ¸ÀÓ È­¿° ÀÌÆåÆ®)
+    public TextMeshProUGUI scoreText;
+    public Slider cooldownSlider;
+    public GameObject oven_fire_fx;
 
     private int score = 0;
     public int bad = -1;
     public int good = 1;
-    public int perfect = 2;
+    public int perfect = 1;
 
     public bool isFull;
-
     public bool canCook = true;
+
     private float cookCooldown = 10f;
     private float cookTimer = 0f;
+
+    // â¬‡ï¸ ìƒˆë¡œìš´ ì ìˆ˜ ë³´ë¥˜ìš© ë³€ìˆ˜
+    private int pendingScore = 0;
+    private string pendingMessage = "";
+    private bool hasPendingResult = false;
 
     void Start()
     {
@@ -47,7 +51,7 @@ public class Oven : MonoBehaviour
             cookTimer -= Time.deltaTime;
 
             if (cooldownSlider != null)
-                cooldownSlider.value = cookTimer;  // 10 -> 0 À¸·Î °¨¼Ò
+                cooldownSlider.value = cookTimer;
 
             if (oven_fire_fx != null)
                 oven_fire_fx.SetActive(true);
@@ -55,7 +59,19 @@ public class Oven : MonoBehaviour
             if (cookTimer <= 0f)
             {
                 canCook = true;
-                ovenText.text = "Oven is ready to cook again!";
+
+                if (hasPendingResult)
+                {
+                    score += pendingScore;
+                    ovenText.text = pendingMessage;
+                    UpdateScoreText();
+                    hasPendingResult = false;
+                }
+                else
+                {
+                    ovenText.text = "Oven is ready to cook again!";
+                }
+
                 if (cooldownSlider != null)
                     cooldownSlider.value = 0;
 
@@ -80,6 +96,15 @@ public class Oven : MonoBehaviour
 
         if (currentN >= requiredN)
         {
+            canCook = false;
+            cookTimer = cookCooldown;
+
+            if (cooldownSlider != null)
+            {
+                cooldownSlider.maxValue = cookCooldown;
+                cooldownSlider.value = cookCooldown;
+            }
+
             bool hasBad = false;
             int specialCount = 0;
 
@@ -91,7 +116,7 @@ public class Oven : MonoBehaviour
                 {
                     hasBad = true;
                 }
-                else if (ingredient == "speciel_meat" || ingredient == "speciel_grain" || ingredient == "speciel_vegitable")
+                else if (ingredient.StartsWith("speciel_"))
                 {
                     specialCount++;
                 }
@@ -99,35 +124,26 @@ public class Oven : MonoBehaviour
 
             if (hasBad)
             {
-                ovenText.text = "Cooking failed: bad ingredient detected (bone/skull).";
+                pendingScore = 0;
+                pendingMessage = "Cooking failed: bad ingredient detected (bone/skull).";
             }
             else if (specialCount > 0)
             {
-                int gained = perfect * specialCount;
-                score += gained;
-                ovenText.text = $"Perfect cook! {specialCount} special ingredient(s): +{gained} points!";
+                pendingScore = specialCount + 1;
+                pendingMessage = $"Perfect cook! {specialCount} special ingredient(s): +{pendingScore} points!";
             }
             else
             {
-                score += good;
-                ovenText.text = "Cooking success: +1 point.";
+                pendingScore = good;
+                pendingMessage = "Cooking success: +1 point.";
             }
 
-            // ÃÊ±âÈ­
+            hasPendingResult = true;
+
             currentN = 0;
             isFull = false;
             currentIngredients = new string[3];
             ovenCanvas?.ClearAllImages();
-            UpdateScoreText();
-
-            // ÄðÅ¸ÀÓ ½ÃÀÛ
-            canCook = false;
-            cookTimer = cookCooldown;
-            if (cooldownSlider != null)
-            {
-                cooldownSlider.maxValue = cookCooldown;
-                cooldownSlider.value = cookCooldown;
-            }
         }
         else
         {
@@ -148,15 +164,7 @@ public class Oven : MonoBehaviour
             currentIngredients[currentN] = food;
             currentN++;
             ovenText.text = $"{food} added to oven. (count:{currentN})";
-            Debug.Log($"{food}À»(¸¦) ¿Àºì¿¡ Ãß°¡Çß½À´Ï´Ù. (ÇöÀç {currentN}°³)");
-
-            string ingredientList = "ÇöÀç ¿Àºì Àç·á: ";
-            for (int i = 0; i < currentN; i++)
-            {
-                ingredientList += currentIngredients[i];
-                if (i < currentN - 1) ingredientList += ", ";
-            }
-            Debug.Log(ingredientList);
+            Debug.Log($"{food}ì„(ë¥¼) ì˜¤ë¸ì— ì¶”ê°€í–ˆìŠµë‹ˆë‹¤. (í˜„ìž¬ {currentN}ê°œ)");
 
             ovenCanvas?.ShowIngredientImage(food, currentN - 1);
 
@@ -168,7 +176,7 @@ public class Oven : MonoBehaviour
         else
         {
             ovenText.text = "Oven is full! Cook before adding new ingredients.";
-            Debug.Log("¿ÀºìÀÌ ²ËÂ÷ÀÖ½À´Ï´Ù! »õ Àç·á¸¦ ³Ö±â Àü, ¿ä¸®ÇÏ¼¼¿ä!");
+            Debug.Log("ì˜¤ë¸ì´ ê½‰ì°¨ìžˆìŠµë‹ˆë‹¤! ìƒˆ ìž¬ë£Œë¥¼ ë„£ê¸° ì „, ìš”ë¦¬í•˜ì„¸ìš”!");
         }
     }
 
