@@ -3,14 +3,23 @@ using UnityEngine;
 public class LavaHot : MonoBehaviour
 {
     public GameObject smoke_fx;
+    private PlayerController playerController;
     int burnGauge = 0;
     bool inLava = false;
+    private void Start()
+    {
+        playerController = GetComponent<PlayerController>();
+        if (playerController == null)
+        {
+            Debug.LogError("PlayerController 컴포넌트를 찾을 수 없습니다!");
+        }
+    }
     private void Update()
     {
         if (inLava)
         {
             burnGauge++;
-            //Debug.Log($"Lava에 닿아 있는 중...: {burnGauge}");
+            Debug.Log($"Lava에 닿아 있는 중...: {burnGauge}");
         }
         else
         {
@@ -28,15 +37,19 @@ public class LavaHot : MonoBehaviour
             inLava = false;
             burnGauge = 0;
             smoke_fx.SetActive(false);
+            if (playerController != null)
+                playerController.moveSpeed = 5f;
 
         }
     }
 
     void CheckTooHot()
     {
-        if (burnGauge > 300)
+        if (burnGauge > 0)
         {
             smoke_fx.SetActive(true);
+            if (playerController != null)
+                playerController.moveSpeed = 2f;
         }
     }
 }
