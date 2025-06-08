@@ -6,6 +6,7 @@ public class LavaHot : MonoBehaviour
     private PlayerController playerController;
     int burnGauge = 0;
     bool inLava = false;
+    public float Lavaspeed = 2.7f;
     private void Start()
     {
         playerController = GetComponent<PlayerController>();
@@ -49,7 +50,7 @@ public class LavaHot : MonoBehaviour
         {
             smoke_fx.SetActive(true);
             if (playerController != null)
-                playerController.moveSpeed = 2f;
+                playerController.moveSpeed = Lavaspeed;
         }
     }
 }

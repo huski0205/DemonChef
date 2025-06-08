@@ -24,6 +24,9 @@ public class Timer : MonoBehaviour
     public GameObject winR;
     public GameObject loseR;
 
+    [Header("사운드")]
+    public AudioSource timeOver_audio;
+
     void Start()
     {
         remainingTime = timeLimit;
@@ -40,9 +43,10 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if (isTimeOver)
+        if (isTimeOver) {
+            QuitOrReplay();
             return;
-
+        }
         // 시간 감소
         remainingTime -= Time.deltaTime;
 
@@ -63,6 +67,7 @@ public class Timer : MonoBehaviour
     {
         isTimeOver = true;
         Debug.Log("게임 오버!");
+        timeOver_audio.Play();
         DecideWinner();
 
     }
@@ -88,6 +93,27 @@ public class Timer : MonoBehaviour
             Debug.Log("무승부!");
             loseL.SetActive(true);
             loseR.SetActive(true);
+        }
+    }
+    void QuitOrReplay()
+    {
+        if (Input.anyKeyDown)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                // 게임 종료
+                Application.Quit();
+
+                // 에디터에서는 Quit이 작동 안 하므로, 테스트할 땐 아래 로그로 확인
+                Debug.Log("게임 종료됨");
+            }
+            else
+            {
+                // 리플레이 (현재 씬 다시 로드)
+                UnityEngine.SceneManagement.SceneManager.LoadScene(
+                    UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex
+                );
+            }
         }
     }
 }
