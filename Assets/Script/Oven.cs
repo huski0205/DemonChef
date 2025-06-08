@@ -30,6 +30,11 @@ public class Oven : MonoBehaviour
     private string pendingMessage = "";
     private bool hasPendingResult = false;
 
+    [Header("사운드")]
+    public AudioSource ovenWorking_audio;
+    public AudioSource bad_audio;
+    public AudioSource good_audio;
+    public AudioSource perfect_audio;
     void Start()
     {
         UpdateScoreText();
@@ -65,6 +70,7 @@ public class Oven : MonoBehaviour
                     score += pendingScore;
                     ovenText.text = pendingMessage;
                     UpdateScoreText();
+                    PlayCookedAudio();
                     hasPendingResult = false;
                 }
                 else
@@ -144,6 +150,8 @@ public class Oven : MonoBehaviour
             isFull = false;
             currentIngredients = new string[3];
             ovenCanvas?.ClearAllImages();
+
+            ovenWorking_audio.Play();
         }
         else
         {
@@ -183,6 +191,13 @@ public class Oven : MonoBehaviour
     private void UpdateScoreText()
     {
         scoreText.text = score.ToString();
+    }
+    private void PlayCookedAudio()
+    {
+        if (score == 0) { bad_audio.Play(); }
+        else if (score == good) { good_audio.Play(); }
+        else { perfect_audio.Play(); }
+    
     }
 
     public int Score

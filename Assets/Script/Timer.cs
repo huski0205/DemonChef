@@ -24,6 +24,9 @@ public class Timer : MonoBehaviour
     public GameObject winR;
     public GameObject loseR;
 
+    [Header("사운드")]
+    public AudioSource timeOver_audio;
+
     void Start()
     {
         remainingTime = timeLimit;
@@ -63,6 +66,7 @@ public class Timer : MonoBehaviour
     {
         isTimeOver = true;
         Debug.Log("게임 오버!");
+        timeOver_audio.Play();
         DecideWinner();
 
     }
