@@ -25,8 +25,11 @@ public class Timer : MonoBehaviour
     public GameObject loseL; 
     public GameObject winR;
     public GameObject loseR;
+    public TextMeshProUGUI replayQuit;
+
 
     [Header("사운드")]
+    public AudioSource bgm_audio;
     public AudioSource timeOver_audio;
 
     void Start()
@@ -41,6 +44,7 @@ public class Timer : MonoBehaviour
         loseL.SetActive(false);
         winR.SetActive(false);
         loseR.SetActive(false);
+        replayQuit.enabled = false;
     }
 
     void Update()
@@ -76,8 +80,11 @@ public class Timer : MonoBehaviour
         isTimeOver = true;
         timeOverElapsed = 0f; // ← 꼭 초기화 해주기
         Debug.Log("게임 오버!");
+        bgm_audio.Pause();
         timeOver_audio.Play();
         DecideWinner();
+        replayQuit.enabled = true;
+
     }
 
     void DecideWinner()
