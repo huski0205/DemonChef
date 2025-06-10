@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 
 public class Timer : MonoBehaviour
@@ -25,6 +26,7 @@ public class Timer : MonoBehaviour
     public GameObject loseL; 
     public GameObject winR;
     public GameObject loseR;
+    public GameObject Panel;
     public TextMeshProUGUI replayQuit;
 
 
@@ -44,6 +46,7 @@ public class Timer : MonoBehaviour
         loseL.SetActive(false);
         winR.SetActive(false);
         loseR.SetActive(false);
+        Panel.SetActive(false);
         replayQuit.enabled = false;
     }
 
@@ -97,17 +100,20 @@ public class Timer : MonoBehaviour
             Debug.Log("왼쪽이 우승!");
             winL.SetActive(true);
             loseR.SetActive(true);
+            Panel.SetActive(true);
         }
         else if (scoreL < scoreR)
         { //왼쪽이 승자
             Debug.Log("왼쪽이 우승!");
             loseL.SetActive(true);
-            winR.SetActive(true);       
+            winR.SetActive(true);
+            Panel.SetActive(true);
         }
         else {
             Debug.Log("무승부!");
             loseL.SetActive(true);
             loseR.SetActive(true);
+            Panel.SetActive(true);
         }
     }
     void QuitOrReplay()
