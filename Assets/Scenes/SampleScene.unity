@@ -6798,7 +6798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0832173c434b04e4dadb28e0dc1656b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 60
+  timeLimit: 10
   timerText: {fileID: 1643561873}
   ovenL: {fileID: 832450934}
   ovenR: {fileID: 546588078}

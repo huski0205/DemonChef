@@ -12,6 +12,8 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI timerText; // UI 텍스트에 시간 표시 (선택사항)
 
     private bool isTimeOver = false;
+    private float delayAfterTimeOver = 3f;
+    private float timeOverElapsed = 0f;
 
     [Header("점수계산")]
     public GameObject ovenL; //인스펙터에서 할당
@@ -43,17 +45,23 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if (isTimeOver) {
-            QuitOrReplay();
+        if (isTimeOver)
+        {
+            timeOverElapsed += Time.deltaTime;
+            if (timeOverElapsed >= delayAfterTimeOver)
+            {
+                QuitOrReplay();
+            }
             return;
         }
+
         // 시간 감소
         remainingTime -= Time.deltaTime;
 
         // 시간 표시
         if (timerText != null)
         {
-            timerText.text =  Mathf.CeilToInt(remainingTime).ToString();
+            timerText.text = Mathf.CeilToInt(remainingTime).ToString();
         }
 
         // 시간이 다 되면 게임 오버 처리
@@ -66,10 +74,10 @@ public class Timer : MonoBehaviour
     void TimeOver()
     {
         isTimeOver = true;
+        timeOverElapsed = 0f; // ← 꼭 초기화 해주기
         Debug.Log("게임 오버!");
         timeOver_audio.Play();
         DecideWinner();
-
     }
 
     void DecideWinner()
