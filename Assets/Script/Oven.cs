@@ -30,11 +30,16 @@ public class Oven : MonoBehaviour
     private string pendingMessage = "";
     private bool hasPendingResult = false;
 
+    public FinishFood textureController;
+    private string pedingTexture="";
+
     [Header("사운드")]
     public AudioSource ovenWorking_audio;
     public AudioSource bad_audio;
     public AudioSource good_audio;
     public AudioSource perfect_audio;
+
+   
     void Start()
     {
         UpdateScoreText();
@@ -69,6 +74,7 @@ public class Oven : MonoBehaviour
                 {
                     score += pendingScore;
                     ovenText.text = pendingMessage;
+                    textureController.SetTextureByResult(pedingTexture);
                     UpdateScoreText();
                     PlayCookedAudio();
                     hasPendingResult = false;
@@ -132,16 +138,19 @@ public class Oven : MonoBehaviour
             {
                 pendingScore = 0;
                 pendingMessage = "Cooking failed: bad ingredient detected (bone/skull).";
+                pedingTexture = "bad";
             }
             else if (specialCount > 0)
             {
                 pendingScore = specialCount + 1;
                 pendingMessage = $"Perfect cook! {specialCount} special ingredient(s): +{pendingScore} points!";
+                pedingTexture = "perfect";
             }
             else
             {
                 pendingScore = good;
                 pendingMessage = "Cooking success: +1 point.";
+                pedingTexture = "good";
             }
 
             hasPendingResult = true;
