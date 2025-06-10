@@ -2540,6 +2540,7 @@ MonoBehaviour:
   - {fileID: 370062315}
   - {fileID: 1005838045}
   - {fileID: 940114017}
+  spawnWeights: []
   minSpawnDelay: 1
   maxSpawnDelay: 3
 --- !u!1 &1715013244
