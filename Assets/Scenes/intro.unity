@@ -2534,13 +2534,25 @@ MonoBehaviour:
   - {fileID: 2425105318253746861, guid: 47ddbaa3437c39a44aa4bf9994b090a0, type: 3}
   - {fileID: 5956540766739802260, guid: 43249f9b653487d46ac53251f75a9864, type: 3}
   - {fileID: 1031164692123395285, guid: 4343b0f27cbc8b746a06de6a7dd70cba, type: 3}
+  - {fileID: 1031164692123395285, guid: 4343b0f27cbc8b746a06de6a7dd70cba, type: 3}
+  - {fileID: 1031164692123395285, guid: 4343b0f27cbc8b746a06de6a7dd70cba, type: 3}
+  - {fileID: 1031164692123395285, guid: 4343b0f27cbc8b746a06de6a7dd70cba, type: 3}
+  - {fileID: 1031164692123395285, guid: 4343b0f27cbc8b746a06de6a7dd70cba, type: 3}
   spawnPoints:
   - {fileID: 1552311585}
   - {fileID: 1319136508}
   - {fileID: 370062315}
   - {fileID: 1005838045}
   - {fileID: 940114017}
-  spawnWeights: []
+  spawnWeights:
+  - 10
+  - 10
+  - 10
+  - 10
+  - 5
+  - 5
+  - 8
+  - 5
   minSpawnDelay: 1
   maxSpawnDelay: 3
 --- !u!1 &1715013244
